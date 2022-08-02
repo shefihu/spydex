@@ -30,7 +30,7 @@ function Banner({ netflixOriginals }: Props) {
       <p className="max-w-xs text-shadow-md text-xs md:max-w-lg md:text-lg lg:max-w-2xl lg:text-2xl">
         {movie?.overview}
       </p>
-      <div className="flex space-x-3">
+      {/* <div className="flex space-x-3">
         <button className="bannerButton bg-blue-600 text-white ">
           <FaPlay className="h-4 w-4 text-white md:h-7 md:w-7" /> Play
         </button>
@@ -38,7 +38,7 @@ function Banner({ netflixOriginals }: Props) {
           <InformationCircleIcon className="h-5 w-5 md:h-8 md:w-8" />
           MOre info
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

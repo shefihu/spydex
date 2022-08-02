@@ -3,6 +3,7 @@ import Image from "next/image";
 import Banner from "../components/Banner";
 import Header from "../components/Header";
 import Row from "../components/Row";
+import useAuth from "../hooks/useAuth";
 import { Movie } from "../typings";
 import requests from "../utils/requests";
 
@@ -27,10 +28,12 @@ const Home = ({
   topRated,
   trendingNow,
 }: Props) => {
+  const { signIn, signUp, loading } = useAuth();
+  if (loading) return null;
   return (
     <div className="relative h-screen bg-gradient-to-b from-gray-800/10 to-zinc-900 lg:h-[140vh]">
       <Head>
-        <title>Create Next App</title>
+        <title>Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* Header */}
