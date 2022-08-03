@@ -84,8 +84,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const data = await signInWithEmailAndPassword(auth, email, password).then(
         (userCredential) => {
           setUser(userCredential.user);
-          setLoading(false);
           router.push("/");
+          setLoading(false);
         }
       );
     } catch (error: any) {

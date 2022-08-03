@@ -6,7 +6,7 @@ import { ClipLoader } from "react-spinners";
 import * as Yup from "yup";
 import useAuth from "../hooks/useAuth";
 function Login() {
-  const [login, setLogin] = useState();
+  const [login, setLogin] = useState(false);
   const { signIn, signUp, loading } = useAuth();
   const validate = Yup.object({
     email: Yup.string().email("Invalid email").required("Required"),
@@ -44,11 +44,15 @@ function Login() {
         //       return errors;
         //     }}
         validationSchema={validate}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={async (values, { setSubmitting }) => {
           // setLoading(true);
           const email = values.email;
           const password = values.password;
-          signUp(email, password);
+          if (login) {
+            await signIn(email, password);
+          } else {
+            await signUp(email, password);
+          }
           //   signInWithEmail(email, password);
         }}
       >
@@ -108,7 +112,7 @@ function Login() {
               </div>
               {loading ? (
                 <button
-                  // onClick={handleSubmit}
+                  onClick={() => setLogin(true)}
                   type="submit"
                   className="w-full rounded bg-blue-500 py-3 font-semibold"
                 >
@@ -117,6 +121,7 @@ function Login() {
               ) : (
                 <button
                   // onClick={handleSubmit}
+                  onClick={() => setLogin(true)}
                   type="submit"
                   className="w-full rounded bg-blue-500 py-2 font-semibold"
                 >
@@ -126,7 +131,11 @@ function Login() {
 
               <div>
                 New to netflix?{" "}
-                <button type="submit" className="text-white hover:underline">
+                <button
+                  type="submit"
+                  onClick={() => setLogin(false)}
+                  className="text-white hover:underline"
+                >
                   Sign up Now
                 </button>
               </div>
